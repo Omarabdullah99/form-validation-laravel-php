@@ -28,4 +28,12 @@ class StoreProductRequest extends FormRequest
             'stock' => 'required|boolean'
         ];
     }
+
+    public function messages():array
+    {
+      return[
+         'name.min' => 'প্রোডাক্টের নাম কমপক্ষে ৫ অক্ষরের হতে হবে।',
+         'name.required'=> 'প্রোডাক্টের নাম দিতে হবে, না হলে তৈরি (create) করতে দেওয়া হবে না।'
+      ];
+    }
 }

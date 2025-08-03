@@ -10,27 +10,47 @@
 
 <body>
     <h1>Form Validation Demo</h1>
-
+    @if(session('success'))
+    <div style="color:green">
+        {{ session('success') }}
+    </div>
+    @endif
     <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
         @csrf
         <label>Name:</label>
-        <input type="text" name="name"   /><br />
-
+        <input type="text" name="name" value="{{ old('name') }}"  /><br />
+        @error('name')
+        <div style="color:red">
+            {{ $message }}
+        </div>
+        @enderror
 
         <label>Price:</label>
-        <input type="text" name="price"  /><br />
-
+        <input type="number" name="price" value="{{ old('price') }}"  /><br />
+        @error('price')
+        <div style="color:red">
+            {{ $message }}
+        </div>
+        @enderror
 
         <label>Description:</label>
-        <textarea name="description"></textarea><br />
-
+        <textarea name="description">{{ old('description') }}</textarea><br />
+        @error('description')
+        <div style="color:red">
+            {{ $message }}
+        </div>
+        @enderror
 
         <label>Stock:</label>
         <select name="stock">
-            <option value="1" >In Stock</option>
-            <option value="0" >Out of Stock</option>
+            <option value="1" {{ old('stock')=='1' ?'selected':'' }}>In Stock</option>
+            <option value="0" {{ old('stock')=='0' ?'selected':'' }}>Out of Stock</option>
         </select><br />
-
+        @error('stock')
+        <div style="color:red">
+            {{ $message }}
+        </div>
+        @enderror
 
 
         <button type="Submit">Create Product</button>

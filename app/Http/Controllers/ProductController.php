@@ -9,4 +9,8 @@ class ProductController extends Controller
     function index(){
         return view('product.store');
     }
+
+    function store(){
+
+    }
 }

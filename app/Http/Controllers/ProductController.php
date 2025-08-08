@@ -17,14 +17,18 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
         if ($request->hasFile('product_image')) {
-            $imagePath = $request->file('product_image')->store('product_images', 'public');
+
+            $image = $request->file('product_image');
+            $orginalName = $image->getClientOriginalName();
+            $imagePath = $request->file('product_image')->storeAs('product_images',$orginalName, 'public');
             $validated['product_image'] = $imagePath;
         }
         Product::create($validated);
         return redirect()->back()->with('success', 'Product saved successfully');
     }
 
-    function show(){
+    function show()
+    {
         return Product::all();
     }
 }

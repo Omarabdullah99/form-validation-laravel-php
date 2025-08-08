@@ -23,4 +23,8 @@ class ProductController extends Controller
         Product::create($validated);
         return redirect()->back()->with('success', 'Product saved successfully');
     }
+
+    function show(){
+        return Product::all();
+    }
 }
